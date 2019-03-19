@@ -15,15 +15,18 @@ database = df.to_list()
 sent = pd.read_csv(r'C:\Users\names.csv',encoding = "UTF-8")
 sent = sent['header'].to_list()
 
-matches = []
+sent_name = []
+quickbase_match = []
+match_score = []
 s_length = len(sent)-1
-d_length = len(database)-1
+q_length = len(quickbase)-1
 for i in range(0,s_length):
     for n in range(0,q_length):
-        if fuzz.token_sort_ratio(sent[i],database[n]) >= 90:
-            matches.append(str(sent[i])+" / "+str(database[n])+" / "+(str(fuzz.token_sort_ratio(sent[i],database[n]))))
-            print(str(sent[i])+" / "+str(database[n])+" / "+(str(fuzz.token_sort_ratio(sent[i],database[n]))))
-                
-fuzzymatches = pd.DataFrame(matches)
-fuzzymatches.to_csv('fuzzy_matches.csv')
-fuzzymatches
+        if fuzz.token_sort_ratio(sent[i],quickbase[n]) >= 90:
+            sent_name.append(sent[i])
+            quickbase_match.append(quickbase[n])
+            match_score.append(fuzz.token_sort_ratio(sent[i],quickbase[n]))
+            print(str(sent[i])+" / "+str(quickbase[n])+" / "+(str(fuzz.token_sort_ratio(sent[i],quickbase[n]))))
+
+fuzzy_dataframe = pd.DataFrame({'sent_name': sent_name, 'quickbase_match': quickbase_match, 'match_score': match_score})
+fuzzy_dataframe.to_csv('fuzzy_matches.csv')
