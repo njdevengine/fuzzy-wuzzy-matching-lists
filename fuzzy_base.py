@@ -1,3 +1,9 @@
+#conda install retrying
+#pip install python-Levenshtein
+#pip install python_Levenshtein-0.12.0-cp35-none-win_amd64.whl
+#conda install -c conda-forge python-levenshtein
+#pip install fuzzywuzzy
+
 from fuzzywuzzy import fuzz
 from fuzzywuzzy import process
 import pandas as pd
